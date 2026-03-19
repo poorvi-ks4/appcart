@@ -1,0 +1,11 @@
+@switch (view()) {
+  @case ('login') {
+    <app-login (loggedIn)="onLoggedIn()" />
+  }
+  @case ('dashboard') {
+    <app-dashboard (goToCartEvent)="onGoToCart()" (logoutEvent)="onLogout()" />
+  }
+  @case ('cart') {
+    <app-cart (backEvent)="onBack()" />
+  }
+}

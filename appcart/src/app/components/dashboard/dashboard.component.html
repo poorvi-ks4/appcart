@@ -1,0 +1,21 @@
+<div id="appbar">
+  <div id="user-info">
+    <span id="welcome-user">Welcome, {{ userService.currentUser()?.username }}</span>
+  </div>
+  <div id="cart-info">
+    <span id="cart-count">Cart ({{ cartService.cartCount() }})</span>
+    <button id="cart-button" (click)="goToCart()">🛒</button>
+    <button id="logout-button" (click)="logout()">Logout</button>
+  </div>
+</div>
+
+<div id="application-container">
+  @for (app of applications; track app.name) {
+    <div class="application-card">
+      <img [src]="app.image" [alt]="app.name" />
+      <h3>{{ app.name }}</h3>
+      <p>{{ app.description }}</p>
+      <button class="add-to-cart-btn" (click)="addToCart(app.name)">Add to Cart</button>
+    </div>
+  }
+</div>

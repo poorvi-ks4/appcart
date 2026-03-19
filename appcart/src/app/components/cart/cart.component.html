@@ -1,0 +1,33 @@
+<div id="cart-header">
+  <button id="back-button" (click)="back()">← Back to Apps</button>
+  <h1>Shopping Cart</h1>
+  <div id="user-cart-info">User: <span>{{ userService.currentUser()?.username }}</span></div>
+</div>
+
+<div id="cart-container">
+  <div id="cart-items-list">
+    @if (cartService.cart().length === 0) {
+      <div class="empty-cart">
+        <h2>Your cart is empty</h2>
+        <p>Add some applications to get started!</p>
+      </div>
+    } @else {
+      @for (item of cartService.cart(); track $index) {
+        <div class="cart-item">
+          <div class="cart-item-content">
+            <div class="cart-item-name">{{ item.name }}</div>
+          </div>
+          <button class="remove-btn" (click)="removeFromCart($index)">Remove</button>
+        </div>
+      }
+    }
+  </div>
+
+  <div id="cart-footer">
+    <div id="cart-summary">Total Items: <span>{{ cartService.cartCount() }}</span></div>
+    <div id="cart-buttons">
+      <button id="clear-btn" (click)="clearCart()">Clear Cart</button>
+      <button id="checkout-btn" (click)="checkout()">Checkout</button>
+    </div>
+  </div>
+</div>
