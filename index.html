@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>appcart</title>
+  <link rel="stylesheet" href="styles.css"> 
+</head>
+<body>
+  <div id="login-card">
+     <p>Login page</p>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="Login()">Login</button>
+  </div>
+  <div id="dashboard" style="display: none;">
+    <div id="appbar">
+      <div id="user-info">
+        <span id="welcome-user">Welcome, Guest</span>
+      </div>
+      <div id="cart-info">
+        <span id="cart-count">Cart (0)</span>
+        <button id="cart-button" onclick="goToCart()">🛒</button>
+        <button id="logout-button" onclick="logout()">Logout</button>
+      </div>
+    </div>
+    <div id="application-container">
+    </div>
+  </div>
+
+  <div id="cart-page" style="display: none;">
+    <div id="cart-header">
+      <button id="back-button" onclick="backToDashboard()">← Back to Apps</button>
+      <h1>Shopping Cart</h1>
+      <div id="user-cart-info">User: <span id="cart-username"></span></div>
+    </div>
+    <div id="cart-container">
+      <div id="cart-items-list"></div>
+      <div id="cart-footer">
+        <div id="cart-summary">Total Items: <span id="total-items">0</span></div>
+        <div id="cart-buttons">
+          <button id="clear-btn" onclick="clearCart()">Clear Cart</button>
+          <button id="checkout-btn" onclick="checkout()">Checkout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/cart.js"></script>
+  <script src="js/user.js"></script>
+  <script src="js/application.js"></script>
+</body>
+</html>
