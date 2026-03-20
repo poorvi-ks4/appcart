@@ -11,11 +11,12 @@
 
 <div id="application-container">
   @for (app of applications; track app.name) {
-    <div class="application-card">
+    <div class="application-card" (click)="viewApplication(app)">
       <img [src]="app.image" [alt]="app.name" />
       <h3>{{ app.name }}</h3>
       <p>{{ app.description }}</p>
-      <button class="add-to-cart-btn" (click)="addToCart(app.name)">Add to Cart</button>
+      <span class="price">${{ app.price }}</span>
+      <button class="add-to-cart-btn" (click)="addToCart(app.name); $event.stopPropagation()">Add to Cart</button>
     </div>
   }
 </div>

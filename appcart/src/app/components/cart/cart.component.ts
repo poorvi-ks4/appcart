@@ -22,6 +22,14 @@ export class CartComponent {
     this.cartService.removeFromCart(index);
   }
 
+  incrementQuantity(index: number): void {
+    this.cartService.incrementQuantity(index);
+  }
+
+  decrementQuantity(index: number): void {
+    this.cartService.decrementQuantity(index);
+  }
+
   clearCart(): void {
     if (confirm('Are you sure you want to clear your cart?')) {
       this.cartService.clearCart();

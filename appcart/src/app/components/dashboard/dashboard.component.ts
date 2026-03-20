@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ApplicationService } from '../../services/application.service';
 import { CartService } from '../../services/cart.service';
 import { UserService } from '../../services/user.service';
-import { Application } from '../../models/models';
+import { Application } from '../../models/application.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,6 +15,7 @@ import { Application } from '../../models/models';
 export class DashboardComponent implements OnInit {
   goToCartEvent = output<void>();
   logoutEvent = output<void>();
+  viewApplicationEvent = output<Application>();
 
   applications: Application[] = [];
 
@@ -31,6 +32,10 @@ export class DashboardComponent implements OnInit {
   addToCart(appName: string): void {
     this.cartService.addToCart(appName);
     alert(`${appName} added to cart!`);
+  }
+
+  viewApplication(app: Application): void {
+    this.viewApplicationEvent.emit(app);
   }
 
   goToCart(): void { this.goToCartEvent.emit(); }

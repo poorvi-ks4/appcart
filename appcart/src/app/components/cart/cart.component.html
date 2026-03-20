@@ -17,7 +17,12 @@
           <div class="cart-item-content">
             <div class="cart-item-name">{{ item.name }}</div>
           </div>
-          <button class="remove-btn" (click)="removeFromCart($index)">Remove</button>
+          <div class="cart-item-controls">
+            <button class="qty-btn qty-decrement" (click)="decrementQuantity($index)">−</button>
+            <span class="quantity-display">{{ item.quantity }}</span>
+            <button class="qty-btn qty-increment" (click)="incrementQuantity($index)">+</button>
+            <button class="remove-btn" (click)="removeFromCart($index)">Remove</button>
+          </div>
         </div>
       }
     }
