@@ -1,5 +1,6 @@
-import { Component, output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { CartService } from '../../services/cart.service';
 import { UserService } from '../../services/user.service';
 
@@ -10,13 +11,19 @@ import { UserService } from '../../services/user.service';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
 })
-export class CartComponent {
-  backEvent = output<void>();
-
+export class CartComponent implements OnInit {
   constructor(
     public cartService: CartService,
-    public userService: UserService
+    public userService: UserService,
+    private router: Router
   ) {}
+
+  ngOnInit(): void {
+    if (!this.userService.currentUser()) {
+      this.router.navigate(['/login']);
+      return;
+    }
+  }
 
   removeFromCart(index: number): void {
     this.cartService.removeFromCart(index);
@@ -37,7 +44,9 @@ export class CartComponent {
     }
   }
 
-  back(): void { this.backEvent.emit(); }
+  back(): void {
+    this.router.navigate(['/dashboard']);
+  }
 
   checkout(): void {
     if (this.cartService.cart().length === 0) {
@@ -47,7 +56,7 @@ export class CartComponent {
     if (confirm(`Checkout ${this.cartService.cart().length} item(s)?`)) {
       this.cartService.checkout();
       alert(`Successfully checked out!`);
-      this.backEvent.emit();
+      this.router.navigate(['/dashboard']);
     }
   }
 }

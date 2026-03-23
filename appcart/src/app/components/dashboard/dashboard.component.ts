@@ -1,5 +1,6 @@
-import { Component, output, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { ApplicationService } from '../../services/application.service';
 import { CartService } from '../../services/cart.service';
 import { UserService } from '../../services/user.service';
@@ -13,19 +14,20 @@ import { Application } from '../../models/application.model';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  goToCartEvent = output<void>();
-  logoutEvent = output<void>();
-  viewApplicationEvent = output<Application>();
-
   applications: Application[] = [];
 
   constructor(
     public userService: UserService,
     public cartService: CartService,
-    private appService: ApplicationService
+    private appService: ApplicationService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+    if (!this.userService.currentUser()) {
+      this.router.navigate(['/login']);
+      return;
+    }
     this.applications = this.appService.getApplications();
   }
 
@@ -35,9 +37,15 @@ export class DashboardComponent implements OnInit {
   }
 
   viewApplication(app: Application): void {
-    this.viewApplicationEvent.emit(app);
+    this.router.navigate(['/details', app.name]);
   }
 
-  goToCart(): void { this.goToCartEvent.emit(); }
-  logout(): void { this.logoutEvent.emit(); }
+  goToCart(): void {
+    this.router.navigate(['/cart']);
+  }
+
+  logout(): void {
+    this.userService.logout();
+    this.router.navigate(['/login']);
+  }
 }

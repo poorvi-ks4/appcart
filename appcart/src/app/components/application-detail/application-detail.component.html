@@ -1,24 +1,26 @@
 <div class="detail-container">
   <button class="back-button" (click)="back()">← Back</button>
   
-  <div class="detail-content">
-    <div class="left-section">
-      <img [src]="application().image" [alt]="application().name" class="app-image" />
-    </div>
-    
-    <div class="right-section">
-      <div class="description-section">
-        <h2>{{ application().name }}</h2>
-        <p class="description">{{ application().description }}</p>
+  @if (application) {
+    <div class="detail-content">
+      <div class="left-section">
+        <img [src]="application.image" [alt]="application.name" class="app-image" />
       </div>
       
-      <div class="action-section">
-        <div class="price">
-          <span class="price-label">Price:</span>
-          <span class="price-value">${{ application().price }}</span>
+      <div class="right-section">
+        <div class="description-section">
+          <h2>{{ application.name }}</h2>
+          <p class="description">{{ application.description }}</p>
         </div>
-        <button class="add-to-cart-btn" (click)="addToCart()">Add to Cart</button>
+        
+        <div class="action-section">
+          <div class="price">
+            <span class="price-label">Price:</span>
+            <span class="price-value">${{ application.price }}</span>
+          </div>
+          <button class="add-to-cart-btn" (click)="addToCart()">Add to Cart</button>
+        </div>
       </div>
     </div>
-  </div>
+  }
 </div>

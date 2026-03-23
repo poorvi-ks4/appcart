@@ -1,16 +1,1 @@
-@switch (view()) {
-  @case ('login') {
-    <app-login (loggedIn)="onLoggedIn()" />
-  }
-  @case ('dashboard') {
-    <app-dashboard (goToCartEvent)="onGoToCart()" (logoutEvent)="onLogout()" (viewApplicationEvent)="onViewApplication($event)" />
-  }
-  @case ('cart') {
-    <app-cart (backEvent)="onBack()" />
-  }
-  @case ('app-detail') {
-    @if (selectedApplication()) {
-      <app-application-detail [application]="selectedApplication()!" (backEvent)="onBack()" />
-    }
-  }
-}
+<router-outlet></router-outlet>

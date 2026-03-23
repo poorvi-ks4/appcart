@@ -1,6 +1,9 @@
-import { Component, output } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
+
+console.log('LoginComponent class loaded');
 
 @Component({
   selector: 'app-login',
@@ -10,13 +13,13 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  loggedIn = output<void>();
-
   username = '';
   password = '';
   error = '';
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {
+    console.log('LoginComponent instance created');
+  }
 
   onLogin(): void {
     this.error = '';
@@ -25,6 +28,6 @@ export class LoginComponent {
       this.error = 'Invalid username or password.';
       return;
     }
-    this.loggedIn.emit();
+    this.router.navigate(['/dashboard']);
   }
 }
